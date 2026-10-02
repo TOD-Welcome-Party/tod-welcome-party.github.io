@@ -1,0 +1,13 @@
+# Registrant data must never be published (this repo is public)
+*.xlsx
+*.csv
+
+# Editor / OS / tooling files
+.vscode/
+.claude/
+Thumbs.db
+.DS_Store
+
+# Old, unused photo originals (the optimized versions are images/gallery-*.jpg)
+images/photo_2026-*.jpg
+images/your-photo (2).jpg

@@ -1,0 +1,33 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // The one admin account is the only signed-in user, so "signed in" means admin.
+    function isAdmin() {
+      return request.auth != null;
+    }
+
+    // Agenda + live status: everyone can read, only the admin can change.
+    match /live/{docId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Registrations: anyone can create ONE per phone number (the phone is the document ID),
+    // nobody but the admin can read, change or delete.
+    match /registrations/{phone} {
+      allow create: if
+        phone.matches('^01[0-9]{9}$') &&
+        request.resource.data.keys().hasOnly(['fullName', 'department', 'phone', 'friends', 'createdAt']) &&
+        request.resource.data.phone == phone &&
+        request.resource.data.fullName is string &&
+        request.resource.data.fullName.size() > 0 &&
+        request.resource.data.fullName.size() <= 100 &&
+        request.resource.data.department in ['Preparatory Engineering', 'Electronics & Communications', 'Architecture', 'Civil'] &&
+        request.resource.data.friends in ['0', '1', '2'] &&
+        request.resource.data.createdAt == request.time;
+
+      allow read, update, delete, list: if isAdmin();
+    }
+  }
+}

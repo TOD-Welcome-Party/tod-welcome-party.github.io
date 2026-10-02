@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Welcome Party 2026</title>
+  <meta name="description" content="Welcome Party 2026 at the Higher Institute of Engineering and Technology - TOD. Sunday, October 11. Program, live updates and registration." />
+  <meta name="theme-color" content="#0a1f3d" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Welcome Party 2026" />
+  <meta property="og:description" content="Sunday, October 11 - Higher Institute of Engineering and Technology, TOD. See the live program and register your attendance." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%230a1f3d'/%3E%3Crect x='6' y='6' width='88' height='88' fill='none' stroke='%23c9a227' stroke-width='6'/%3E%3Ctext x='50' y='70' font-size='58' font-weight='900' text-anchor='middle' fill='%23c9a227' font-family='Arial,sans-serif'%3EW%3C/text%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ===== TOP BAR ===== -->
+  <nav class="navbar" aria-label="Main">
+    <a class="logo" href="#home">Welcome Party</a>
+    <div class="nav-links" id="navLinks">
+      <a href="#home" class="active">Home</a>
+      <a href="#program">Program</a>
+      <a href="#activities">Activities</a>
+      <a href="#gallery">Gallery</a>
+    </div>
+    <a class="nav-register" href="#register">Register</a>
+    <button class="nav-toggle" id="navToggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- ===== LIVE BANNER (filled in by script.js from Firestore) ===== -->
+  <div id="liveBanner" class="live-banner hidden" role="status" aria-live="polite">
+    <span class="live-tag"><span class="live-dot"></span><span id="liveTag">LIVE NOW</span></span>
+    <span class="live-text">
+      <b id="liveLabel" dir="auto"></b>
+      <span id="liveLocation" class="live-location" dir="auto"></span>
+    </span>
+  </div>
+
+  <!-- ===== HOME ===== -->
+  <section id="home" class="hero">
+    <div class="hero-photo" aria-hidden="true"></div>
+    <div class="inner">
+      <p class="kicker">Higher Institute of Engineering and Technology &middot; TOD</p>
+      <h1><span>Welcome</span> <span>Party</span> <span class="year">2026</span></h1>
+      <p class="subtitle">One night to meet your class, before the real journey begins.</p>
+
+      <div class="hero-cta">
+        <a href="#register" class="btn">Register now</a>
+        <a href="#program" class="link-arrow">See the program</a>
+      </div>
+
+      <div class="countdown" role="timer" aria-label="Time left until the party">
+        <div class="countdown-box"><span id="days">00</span><small>Days</small></div>
+        <div class="countdown-box"><span id="hours">00</span><small>Hours</small></div>
+        <div class="countdown-box"><span id="minutes">00</span><small>Min</small></div>
+      </div>
+
+      <dl class="titleblock">
+        <div>
+          <dt>Date</dt>
+          <dd>Sunday, Oct 11</dd>
+        </div>
+        <div>
+          <dt>Time</dt>
+          <dd>9:00 AM</dd>
+        </div>
+        <div>
+          <dt>Venue</dt>
+          <dd>Higher Institute of Engineering and Technology - TOD</dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- ===== WHAT TO EXPECT ===== -->
+  <section class="sheet sheet--paper" aria-labelledby="expectTitle">
+    <div class="inner">
+      <header class="sec-head">
+        <span class="sec-no">01</span>
+        <div>
+          <h2 id="expectTitle">What to expect</h2>
+        </div>
+      </header>
+      <ol class="legend">
+        <li>
+          <span class="mark">A</span>
+          <div><b>Before the hall</b><p>Games &amp; activities</p></div>
+        </li>
+        <li>
+          <span class="mark">B</span>
+          <div><b>In hall</b><p>Recitation &amp; speeches</p></div>
+        </li>
+        <li>
+          <span class="mark">C</span>
+          <div><b>A day to remember</b><p>Music &amp; photos</p></div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ===== PROGRAM ===== -->
+  <section id="program" class="sheet sheet--paper">
+    <div class="inner">
+      <header class="sec-head">
+        <span class="sec-no">02</span>
+        <div>
+          <h2>Program</h2>
+          <p>Sunday, October 11</p>
+        </div>
+      </header>
+
+      <div class="timeline-section">
+        <!-- script.js replaces everything inside #agendaList with the live agenda from Firestore.
+             The markup below is the fallback shown if Firestore can't be reached. -->
+        <div id="agendaList">
+          <p class="stage-label">Before the hall</p>
+          <div class="timeline">
+            <div class="timeline-item">
+              <span class="time">8:30 AM</span>
+              <div class="timeline-content">
+                <b>Arrival &amp; check-in</b>
+                <p>Games, activities, glitter face paint</p>
+              </div>
+            </div>
+          </div>
+
+          <p class="stage-label">Inside the hall</p>
+          <div class="timeline">
+            <div class="timeline-item"><div class="timeline-content"><b>Quran recitation</b></div></div>
+            <div class="timeline-item"><div class="timeline-content"><b>National anthem</b></div></div>
+            <div class="timeline-item"><div class="timeline-content"><b>CEO speech</b></div></div>
+            <div class="timeline-item"><div class="timeline-content"><b>Dean's speech</b></div></div>
+            <div class="timeline-item"><div class="timeline-content"><b>Deputy deans' speeches</b></div></div>
+            <div class="timeline-item"><div class="timeline-content"><b>October 6 War commemoration</b></div></div>
+            <div class="timeline-item"><div class="timeline-content"><b>A theatrical performance</b></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== REGISTER ===== -->
+  <section id="register" class="sheet sheet--blue">
+    <div class="inner">
+      <header class="sec-head">
+        <span class="sec-no">03</span>
+        <div>
+          <h2>Register</h2>
+          <p>Confirm your attendance - it takes a minute</p>
+        </div>
+      </header>
+
+      <div class="form-section">
+        <form id="registerForm" class="form-card" novalidate>
+
+          <label for="fullName">Full name</label>
+          <input type="text" id="fullName" name="fullName" placeholder="e.g. Sara Ahmed" required maxlength="100" autocomplete="name" />
+
+          <label for="department">Department</label>
+          <select id="department" name="department" required>
+            <option value="" disabled selected>Select department</option>
+            <option value="Preparatory Engineering">Preparatory Engineering</option>
+            <option value="Electronics &amp; Communications">Electronics &amp; Communications</option>
+            <option value="Architecture">Architecture</option>
+            <option value="Civil">Civil</option>
+          </select>
+
+          <label for="phone">Phone number</label>
+          <input type="tel" id="phone" name="phone" placeholder="01xxxxxxxxx" required maxlength="20" inputmode="tel" autocomplete="tel" />
+
+          <span class="field-label" id="friendsLabel">Bringing friends?</span>
+          <div class="options" role="radiogroup" aria-labelledby="friendsLabel">
+            <label class="option"><input type="radio" name="friends" value="0" checked /><span>No</span></label>
+            <label class="option"><input type="radio" name="friends" value="1" /><span>1 friend</span></label>
+            <label class="option"><input type="radio" name="friends" value="2" /><span>2 friends</span></label>
+          </div>
+
+          <div class="form-submit">
+            <button type="submit" class="btn">Confirm registration</button>
+          </div>
+          <p id="formStatus" class="form-status" role="status" aria-live="polite"></p>
+        </form>
+
+        <!-- Hidden by default, filled in and shown by script.js after a successful submit -->
+        <div id="successMessage" class="success-box hidden"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ACTIVITIES ===== -->
+  <section id="activities" class="sheet sheet--paper">
+    <div class="inner">
+      <header class="sec-head">
+        <span class="sec-no">04</span>
+        <div>
+          <h2>Before the hall</h2>
+          <p>Games &amp; activities from 8:30 AM</p>
+        </div>
+      </header>
+
+      <ol class="activity-list">
+        <li>
+          <span class="num">01</span>
+          <div><b>Face &amp; glitter art</b><p>Get a sparkle tattoo before you head in</p></div>
+        </li>
+        <li>
+          <span class="num">02</span>
+          <div><b>QR Code game</b><p>Scan the clues and follow the trail to find the hidden treasure</p></div>
+        </li>
+        <li>
+          <span class="num">03</span>
+          <div><b>Polaroid corner</b><p>Instant photos to keep</p></div>
+        </li>
+        <li>
+          <span class="num">04</span>
+          <div><b>Casino games</b><p>Try your luck, play fun casino-style games, and collect points</p></div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ===== GALLERY ===== -->
+  <section id="gallery" class="sheet sheet--blue">
+    <div class="inner">
+      <header class="sec-head">
+        <span class="sec-no">05</span>
+        <div>
+          <h2>Gallery</h2>
+          <p>Moments worth keeping</p>
+        </div>
+      </header>
+
+      <div class="gallery-grid">
+        <figure><img src="images/gallery-1.jpg" alt="Welcome party photo 1" class="gallery-photo" width="400" height="400" loading="lazy" /><figcaption>Fig. 01</figcaption></figure>
+        <figure><img src="images/gallery-2.jpg" alt="Welcome party photo 2" class="gallery-photo" width="400" height="400" loading="lazy" /><figcaption>Fig. 02</figcaption></figure>
+        <figure><img src="images/gallery-3.jpg" alt="Welcome party photo 3" class="gallery-photo" width="400" height="400" loading="lazy" /><figcaption>Fig. 03</figcaption></figure>
+        <figure><img src="images/gallery-4.jpg" alt="Welcome party photo 4" class="gallery-photo" width="400" height="400" loading="lazy" /><figcaption>Fig. 04</figcaption></figure>
+        <figure><img src="images/gallery-5.jpg" alt="Welcome party photo 5" class="gallery-photo" width="400" height="400" loading="lazy" /><figcaption>Fig. 05</figcaption></figure>
+        <figure><img src="images/gallery-6.jpg" alt="Welcome party photo 6" class="gallery-photo" width="400" height="400" loading="lazy" /><figcaption>Fig. 06</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CREATED BY ===== -->
+  <section id="created-by" class="sheet sheet--paper">
+    <div class="inner">
+      <p class="credits-label">Created by</p>
+      <div class="credits-grid">
+        <div class="credit-card">
+          <img src="images/your-photo.jpg" alt="Rodeen Khaled" class="credit-photo" width="350" height="350" loading="lazy" />
+          <b>Rodeen Khaled</b>
+        </div>
+        <div class="credit-card">
+          <img src="images/helper-photo.jpg" alt="Ibrahim Mohahmed" class="credit-photo" width="350" height="350" loading="lazy" />
+          <b>Ibrahim Mohahmed</b>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    Welcome Party 2026 &middot; Higher Institute of Engineering and Technology - TOD
+  </footer>
+
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+  <script src="firebase-config.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

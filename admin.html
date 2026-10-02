@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="theme-color" content="#0a1f3d" />
+  <title>Admin - Welcome Party 2026</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* Styles used only on this admin page (colours come from style.css) */
+    body { background-color: var(--paper-2); }
+
+    .admin-card,
+    .admin-lock {
+      background-color: #fff;
+      border: 2px solid var(--ink);
+      box-shadow: 6px 6px 0 var(--gold);
+    }
+    .admin-card {
+      max-width: 1000px;
+      margin: 24px auto;
+      padding: clamp(18px, 4vw, 28px);
+      width: calc(100% - 2 * var(--pad));
+    }
+    .admin-card h2 { font-size: 22px; line-height: 1.2; text-transform: uppercase; letter-spacing: -0.01em; }
+    .admin-lock {
+      max-width: 380px;
+      width: calc(100% - 2 * var(--pad));
+      margin: 56px auto;
+      padding: 28px;
+    }
+    .admin-lock h2 { font-size: 24px; text-transform: uppercase; letter-spacing: -0.01em; }
+    .admin-lock input { margin-top: 12px; }
+    .admin-lock .btn { width: 100%; margin-top: 18px; }
+    .muted { color: var(--muted); font-size: 14px; }
+    .error-text { color: #b00020; font-size: 14px; font-weight: 600; margin-top: 12px; }
+    .admin-nav-user { display: flex; align-items: center; gap: 10px; font: 600 12px var(--mono); color: #cfd8e6; min-width: 0; }
+    .admin-nav-user #userEmail { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 34vw; }
+
+    .field { margin-top: 16px; }
+    .field label { display: block; margin-bottom: 6px; font: 800 12px var(--mono); letter-spacing: 0.12em; text-transform: uppercase; }
+    input[type="text"], input[type="email"], input[type="password"], input[type="search"], select, textarea {
+      width: 100%; min-height: 48px; padding: 11px 13px; font: 16px var(--sans); color: var(--ink);
+      background-color: #fff; border: 2px solid var(--ink); border-radius: 0;
+    }
+    textarea { font-family: var(--mono); font-size: 14px; line-height: 1.5; }
+    input:focus, select:focus, textarea:focus { outline: 3px solid var(--gold); outline-offset: 0; }
+
+    .row { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 18px; }
+    .btn-primary, .btn-secondary, .btn-gold, .btn-small, .btn-mini {
+      display: inline-flex; align-items: center; justify-content: center; font-family: var(--sans);
+      border: 2px solid var(--ink); cursor: pointer; letter-spacing: 0.04em;
+    }
+    .btn-gold { min-height: 48px; padding: 0 22px; background-color: var(--gold); color: var(--ink); font-size: 15px; font-weight: 800; }
+    .btn-mini { min-height: 40px; padding: 0 14px; background-color: #fff; color: var(--ink); font-size: 14px; font-weight: 700; }
+    .btn-mini.danger { color: #b00020; border-color: #b00020; }
+    .btn-mini:disabled { opacity: 0.35; cursor: not-allowed; }
+
+    .agenda-row { margin-top: 14px; padding: 14px; border: 2px solid var(--ink); background-color: var(--paper); }
+    .agenda-head { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 8px; font: 800 12px var(--mono); letter-spacing: 0.12em; text-transform: uppercase; }
+    .agenda-actions { display: flex; gap: 8px; }
+    .agenda-fields { display: grid; grid-template-columns: 1.7fr 1fr; gap: 10px 12px; }
+    .a-field { display: block; min-width: 0; }
+    .a-field span { display: block; margin-bottom: 4px; font: 700 11px var(--mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+    .a-field:nth-child(3), .a-field:nth-child(4) { grid-column: 1 / -1; }
+    @media (min-width: 720px) {
+      .agenda-fields { grid-template-columns: 190px 140px 1fr; }
+      .a-field:nth-child(3) { grid-column: auto; }
+      .a-field:nth-child(4) { grid-column: 1 / -1; }
+    }
+    .btn-primary { min-height: 48px; padding: 0 22px; background-color: var(--ink); color: #fff; font-size: 15px; font-weight: 800; }
+    .btn-primary:hover { background-color: var(--ink-2); }
+    .btn-secondary { min-height: 48px; padding: 0 18px; background-color: #fff; color: var(--ink); font-size: 15px; font-weight: 700; }
+    .btn-small { min-height: 36px; padding: 0 12px; background-color: transparent; color: #fff; border-color: rgba(255, 255, 255, 0.6); font-size: 12px; font-weight: 700; }
+    button:disabled { opacity: 0.6; cursor: wait; }
+
+    .live-now-box { margin-top: 14px; padding: 12px 14px; border: 2px solid var(--ink); background-color: var(--gold); font-size: 15px; font-weight: 600; }
+    .msg { min-height: 1.5em; margin-top: 12px; font-size: 14px; font-weight: 600; color: var(--muted); }
+    .msg.error { color: #b00020; }
+    .msg.ok { color: #1b6b2f; }
+    details summary { cursor: pointer; font-size: 18px; font-weight: 800; text-transform: uppercase; padding: 6px 0; }
+
+    .admin-top { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 6px 14px; }
+    .admin-count { color: var(--muted); font-size: 14px; font-weight: 600; }
+    .search-input { flex: 1 1 200px; width: auto; }
+    .table-wrap { overflow-x: auto; margin-top: 16px; border: 2px solid var(--ink); }
+    table { width: 100%; border-collapse: collapse; font-size: 15px; }
+    th, td { border-bottom: 1px solid var(--rule); padding: 10px 12px; text-align: left; white-space: nowrap; }
+    th { background-color: var(--ink); color: #fff; text-transform: uppercase; font: 700 11px var(--mono); letter-spacing: 0.12em; }
+    tr:nth-child(even) td { background-color: var(--paper); }
+    .empty-msg { color: var(--muted); text-align: center; padding: 40px; }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="logo">Admin</div>
+    <div id="navUser" class="admin-nav-user hidden">
+      <span id="userEmail"></span>
+      <button class="btn-small" id="signOutBtn" type="button">Sign out</button>
+    </div>
+  </nav>
+
+  <!-- ===== SIGN-IN ===== -->
+  <div id="lockScreen" class="admin-lock">
+    <h2>Admin sign-in</h2>
+    <p class="muted" style="margin-top:6px;">Sign in to manage the event.</p>
+    <form id="loginForm">
+      <input type="email" id="emailInput" placeholder="Email" autocomplete="username" required />
+      <input type="password" id="passwordInput" placeholder="Password" autocomplete="current-password" required />
+      <button class="btn" id="loginBtn" type="submit">Sign in</button>
+      <p id="loginError" class="error-text hidden"></p>
+    </form>
+  </div>
+
+  <!-- ===== DASHBOARD (shown only after signing in) ===== -->
+  <div id="adminContent" class="hidden">
+
+    <!-- Live control -->
+    <section class="admin-card">
+      <h2>Live control</h2>
+      <p class="muted" style="margin-top:4px;">Whatever you push here appears instantly in the banner on everyone's phone.</p>
+      <div class="live-now-box">Showing now: <b id="liveNow">-</b></div>
+
+      <div class="field">
+        <label for="liveItem">Current agenda item (marks earlier ones as done)</label>
+        <select id="liveItem"><option value="">None</option></select>
+      </div>
+      <div class="field">
+        <label for="inputLabel">Announcement shown in the banner</label>
+        <input type="text" id="inputLabel" maxlength="140" placeholder="e.g. CEO speech" dir="auto" />
+      </div>
+      <div class="field">
+        <label for="inputLocation">Location / instruction (optional)</label>
+        <input type="text" id="inputLocation" maxlength="140" placeholder="e.g. Please head to Hall 3" dir="auto" />
+      </div>
+
+      <div class="row">
+        <button class="btn-primary" id="pushBtn" type="button">Push live update</button>
+        <button class="btn-gold" id="nextBtn" type="button">Next item</button>
+        <button class="btn-secondary" id="clearBtn" type="button">Clear banner</button>
+      </div>
+      <p class="muted" id="pushCount" style="margin-top:12px;"></p>
+      <p id="liveMsg" class="msg" role="status"></p>
+    </section>
+
+    <!-- Agenda editor -->
+    <section class="admin-card">
+      <h2>Agenda</h2>
+      <p class="muted" style="margin-top:4px;">
+        The program everyone sees. Items above the current one are shown as done.
+        Changes reach attendees only after you press <b>Save agenda</b>.
+      </p>
+
+      <div id="agendaRows" class="agenda-rows"></div>
+
+      <div class="row">
+        <button class="btn-secondary" id="addItemBtn" type="button">Add item</button>
+        <button class="btn-primary" id="saveAgendaBtn" type="button">Save agenda</button>
+        <button class="btn-secondary" id="defaultAgendaBtn" type="button">Reset to default</button>
+      </div>
+      <p id="agendaMsg" class="msg" role="status"></p>
+    </section>
+
+    <!-- Registrations -->
+    <section class="admin-card">
+      <div class="admin-top">
+        <h2>Registrations</h2>
+        <span class="admin-count" id="regCount">Loading...</span>
+      </div>
+
+      <div class="row">
+        <input type="search" id="searchInput" class="search-input" placeholder="Search name, phone or department" />
+        <button class="btn-primary" id="exportBtn" type="button">Export to Excel</button>
+      </div>
+      <p id="exportMsg" class="msg" role="status"></p>
+
+      <div class="table-wrap">
+        <table id="regTable">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Full name</th>
+              <th>Department</th>
+              <th>Phone</th>
+              <th>Friends</th>
+              <th>Time (Cairo)</th>
+            </tr>
+          </thead>
+          <tbody id="regTableBody"></tbody>
+        </table>
+      </div>
+
+      <p id="emptyMsg" class="empty-msg hidden">No registrations yet.</p>
+    </section>
+  </div>
+
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+  <script src="firebase-config.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>
