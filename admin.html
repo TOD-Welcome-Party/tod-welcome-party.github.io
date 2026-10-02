@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex, nofollow" />
   <meta name="theme-color" content="#0a1f3d" />
-  <title>Admin - Welcome Party 2026</title>
+  <title>Admin - Welcome Party 2026/2027</title>
   <link rel="stylesheet" href="style.css" />
   <style>
     /* Styles used only on this admin page (colours come from style.css) */
@@ -40,7 +40,7 @@
 
     .field { margin-top: 16px; }
     .field label { display: block; margin-bottom: 6px; font: 800 12px var(--mono); letter-spacing: 0.12em; text-transform: uppercase; }
-    input[type="text"], input[type="email"], input[type="password"], input[type="search"], select, textarea {
+    input[type="text"], input[type="email"], input[type="password"], input[type="search"], input[type="url"], select, textarea {
       width: 100%; min-height: 48px; padding: 11px 13px; font: 16px var(--sans); color: var(--ink);
       background-color: #fff; border: 2px solid var(--ink); border-radius: 0;
     }
@@ -143,6 +143,22 @@
       </div>
       <p class="muted" id="pushCount" style="margin-top:12px;"></p>
       <p id="liveMsg" class="msg" role="status"></p>
+    </section>
+
+    <!-- WhatsApp group link -->
+    <section class="admin-card">
+      <h2>WhatsApp group link</h2>
+      <p class="muted" style="margin-top:4px;">
+        Shown to everyone right after they register. Leave it empty to hide the button.
+      </p>
+      <div class="field">
+        <label for="inviteInput">Invite link</label>
+        <input type="url" id="inviteInput" placeholder="https://chat.whatsapp.com/..." inputmode="url" autocomplete="off" />
+      </div>
+      <div class="row">
+        <button class="btn-primary" id="saveInviteBtn" type="button">Save link</button>
+      </div>
+      <p id="inviteMsg" class="msg" role="status"></p>
     </section>
 
     <!-- Agenda editor -->

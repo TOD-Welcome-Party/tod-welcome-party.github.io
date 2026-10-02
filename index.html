@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Welcome Party 2026</title>
-  <meta name="description" content="Welcome Party 2026 at the Higher Institute of Engineering and Technology - TOD. Sunday, October 11. Program, live updates and registration." />
+  <title>Welcome Party 2026/2027</title>
+  <meta name="description" content="Welcome Party 2026/2027 at the Higher Institute of Engineering and Technology - TOD. Sunday, October 11. Program, live updates and registration." />
   <meta name="theme-color" content="#0a1f3d" />
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="Welcome Party 2026" />
+  <meta property="og:title" content="Welcome Party 2026/2027" />
   <meta property="og:description" content="Sunday, October 11 - Higher Institute of Engineering and Technology, TOD. See the live program and register your attendance." />
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%230a1f3d'/%3E%3Crect x='6' y='6' width='88' height='88' fill='none' stroke='%23c9a227' stroke-width='6'/%3E%3Ctext x='50' y='70' font-size='58' font-weight='900' text-anchor='middle' fill='%23c9a227' font-family='Arial,sans-serif'%3EW%3C/text%3E%3C/svg%3E" />
   <link rel="stylesheet" href="style.css" />
@@ -43,7 +43,7 @@
     <div class="hero-photo" aria-hidden="true"></div>
     <div class="inner">
       <p class="kicker">Higher Institute of Engineering and Technology &middot; TOD</p>
-      <h1><span>Welcome</span> <span>Party</span> <span class="year">2026</span></h1>
+      <h1><span>Welcome</span> <span>Party</span> <span class="year">2026/2027</span></h1>
       <p class="subtitle">One night to meet your class, before the real journey begins.</p>
 
       <div class="hero-cta">
@@ -156,7 +156,7 @@
         <form id="registerForm" class="form-card" novalidate>
 
           <label for="fullName">Full name</label>
-          <input type="text" id="fullName" name="fullName" placeholder="e.g. Sara Ahmed" required maxlength="100" autocomplete="name" />
+          <input type="text" id="fullName" name="fullName" placeholder="e.g. Rodeen Khaled" required maxlength="100" autocomplete="name" />
 
           <label for="department">Department</label>
           <select id="department" name="department" required>
@@ -181,10 +181,14 @@
             <button type="submit" class="btn">Confirm registration</button>
           </div>
           <p id="formStatus" class="form-status" role="status" aria-live="polite"></p>
+          <a id="inviteAlt" class="invite-alt hidden" href="#" target="_blank" rel="noopener noreferrer">Join the WhatsApp group</a>
         </form>
 
         <!-- Hidden by default, filled in and shown by script.js after a successful submit -->
-        <div id="successMessage" class="success-box hidden"></div>
+        <div id="successMessage" class="success-box hidden">
+          <p id="successText"></p>
+          <a id="inviteLink" class="btn hidden" href="#" target="_blank" rel="noopener noreferrer">Join the WhatsApp group</a>
+        </div>
       </div>
     </div>
   </section>
@@ -261,7 +265,7 @@
   </section>
 
   <footer>
-    Welcome Party 2026 &middot; Higher Institute of Engineering and Technology - TOD
+    Welcome Party 2026/2027 &middot; Higher Institute of Engineering and Technology - TOD
   </footer>
 
   <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>

@@ -181,6 +181,18 @@ function syncBannerHeight() {
 
 window.addEventListener("resize", syncBannerHeight);
 
+// ===== WHATSAPP GROUP INVITE =====
+// Shown after registering. The admin can change it from the dashboard (live/event -> inviteLink).
+const DEFAULT_INVITE_LINK = "https://chat.whatsapp.com/LrsBsB3s27wBHXUk3UT2Dy";
+let inviteUrl = DEFAULT_INVITE_LINK;
+
+// Points a link at the invite, or hides it when there is no valid https link.
+function setInviteLink(anchor) {
+  const valid = /^https:\/\/\S+$/.test(inviteUrl);
+  if (valid) anchor.href = inviteUrl;
+  anchor.classList.toggle("hidden", !valid);
+}
+
 if (agendaList && liveBanner) {
   db.collection("live")
     .doc("event")
@@ -188,6 +200,7 @@ if (agendaList && liveBanner) {
       function (snapshot) {
         const data = snapshot.exists ? snapshot.data() : null;
         const items = data && Array.isArray(data.items) ? data.items : [];
+        inviteUrl = data && typeof data.inviteLink === "string" ? data.inviteLink.trim() : DEFAULT_INVITE_LINK;
 
         if (items.length) renderAgenda(items, data.currentItemId || null);
         renderBanner(data, items);
@@ -215,11 +228,13 @@ function normalizePhone(raw) {
 
 if (registerForm) {
   const formStatus = document.getElementById("formStatus");
+  const inviteAlt = document.getElementById("inviteAlt");
   const submitButton = registerForm.querySelector("button[type='submit']");
 
   function setStatus(message, isError) {
     formStatus.textContent = message;
     formStatus.classList.toggle("error", Boolean(isError));
+    inviteAlt.classList.add("hidden");
   }
 
   registerForm.addEventListener("submit", function (event) {
@@ -264,10 +279,11 @@ if (registerForm) {
       })
       .then(function () {
         const successMessage = document.getElementById("successMessage");
-        successMessage.textContent =
+        document.getElementById("successText").textContent =
           Date.now() >= EVENT_DAY_START
             ? "Welcome! You're checked in."
             : "You're registered. See you on Sunday, October 11.";
+        setInviteLink(document.getElementById("inviteLink"));
         successMessage.classList.remove("hidden");
         registerForm.reset();
         registerForm.classList.add("hidden");
@@ -276,6 +292,7 @@ if (registerForm) {
         console.error("Error saving registration:", error);
         if (error.code === "permission-denied") {
           setStatus("This phone number is already registered. / هذا الرقم مسجل بالفعل.", true);
+          setInviteLink(inviteAlt);
         } else {
           setStatus("Could not save your registration. Check your connection and try again.", true);
         }

@@ -11,6 +11,9 @@ const DEFAULT_ITEMS = [
   { id: "theatre", stage: "in-hall", time: "", title: "A theatrical performance", subtitle: "" }
 ];
 
+// Same default as the public page uses until you save a different link.
+const DEFAULT_INVITE_LINK = "https://chat.whatsapp.com/LrsBsB3s27wBHXUk3UT2Dy";
+
 const auth = firebase.auth();
 const liveRef = db.collection("live").doc("event");
 
@@ -24,6 +27,7 @@ let allRegs = []; // newest first
 let liveItems = [];
 let liveData = null;
 let agendaDraft = []; // the rows being edited in the agenda editor
+let inviteDirty = false;
 let controlsInitialized = false;
 let agendaDirty = false;
 let labelAutoFilled = false;
@@ -98,6 +102,7 @@ function stopListeners() {
   liveData = null;
   controlsInitialized = false;
   agendaDirty = false;
+  inviteDirty = false;
   agendaDraft = [];
   $("agendaRows").replaceChildren();
   $("regTableBody").replaceChildren();
@@ -316,6 +321,11 @@ function renderLiveControls() {
 
   // Fill the agenda editor from what is saved, unless the admin has started editing it
   if (!agendaDirty) setDraft(liveItems.length ? liveItems : DEFAULT_ITEMS);
+
+  // Same for the WhatsApp link (an empty saved value means "no button")
+  if (!inviteDirty) {
+    $("inviteInput").value = liveData && typeof liveData.inviteLink === "string" ? liveData.inviteLink : DEFAULT_INVITE_LINK;
+  }
 }
 
 $("liveItem").addEventListener("change", function () {
@@ -372,6 +382,40 @@ $("clearBtn").addEventListener("click", function () {
   $("inputLocation").value = "";
   labelAutoFilled = false;
   pushLive({ currentItemId: null, label: "", location: "" }, "Banner cleared.");
+});
+
+// ===== WHATSAPP GROUP LINK =====
+// The public page shows this link after someone registers (and falls back to the same default).
+$("inviteInput").addEventListener("input", function () {
+  inviteDirty = true;
+});
+
+$("saveInviteBtn").addEventListener("click", function () {
+  const link = $("inviteInput").value.trim();
+
+  if (link && (!/^https:\/\/\S+$/.test(link) || link.length > 300)) {
+    setMsg("inviteMsg", "The link must start with https:// and have no spaces.", "error");
+    return;
+  }
+
+  const button = $("saveInviteBtn");
+  button.disabled = true;
+  setMsg("inviteMsg", "Saving...", "");
+
+  liveRef
+    .set({ inviteLink: link, updatedAt: firebase.firestore.FieldValue.serverTimestamp() }, { merge: true })
+    .then(function () {
+      inviteDirty = false;
+      bumpPushCount();
+      setMsg("inviteMsg", link ? "Saved. New registrations will see this link." : "Saved. The WhatsApp button is now hidden.", "ok");
+    })
+    .catch(function (error) {
+      console.error("Saving the invite link failed:", error);
+      setMsg("inviteMsg", "Could not save (" + error.code + "). Check your connection and try again.", "error");
+    })
+    .finally(function () {
+      button.disabled = false;
+    });
 });
 
 // ===== NEXT ITEM (one tap moves the live event forward) =====
