@@ -1,6 +1,6 @@
 // ===== EVENT TIMES (Cairo, UTC+3) =====
-const EVENT_START = new Date("2026-10-11T09:00:00+03:00");
-const EVENT_DAY_START = new Date("2026-10-11T00:00:00+03:00");
+const EVENT_START = new Date("2026-10-12T09:00:00+03:00");
+const EVENT_DAY_START = new Date("2026-10-12T00:00:00+03:00");
 
 // ===== MOBILE NAV TOGGLE =====
 const navToggle = document.getElementById("navToggle");
@@ -282,7 +282,7 @@ if (registerForm) {
         document.getElementById("successText").textContent =
           Date.now() >= EVENT_DAY_START
             ? "Welcome! You're checked in."
-            : "You're registered. See you on Sunday, October 11.";
+            : "You're registered. See you on Monday, October 12.";
         setInviteLink(document.getElementById("inviteLink"));
         successMessage.classList.remove("hidden");
         registerForm.reset();
