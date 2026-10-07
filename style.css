@@ -967,11 +967,124 @@ section[id] {
   max-width: 520px;
 }
 
-.credit-card b {
+.credit-name {
   display: block;
   margin-top: 14px;
   font-size: 17px;
   line-height: 1.3;
+}
+
+/* The photo is a link to LinkedIn. */
+.credit-photo-link {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  color: #fff;
+  text-decoration: none;
+  border: 2px solid var(--ink);
+  box-shadow: 6px 6px 0 var(--gold);
+}
+
+.credit-photo-link svg {
+  display: block;
+  fill: currentColor;
+}
+
+/* small LinkedIn badge in the corner (the hint that the photo is a link) */
+.credit-badge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  background-color: var(--ink);
+  color: var(--gold);
+}
+
+.credit-badge svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* full cover with the LinkedIn icon and the name (shown on hover with a mouse) */
+.credit-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px;
+  text-align: center;
+  background-color: var(--ink);
+  background-image:
+    linear-gradient(var(--line-on-dark) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line-on-dark) 1px, transparent 1px);
+  background-size: 24px 24px;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.credit-overlay svg {
+  flex: none; /* don't let the flex column squash the icon */
+  width: clamp(36px, 26%, 72px);
+  height: auto;
+  aspect-ratio: 1;
+  color: var(--gold);
+}
+
+.credit-overlay b {
+  font-size: clamp(15px, 5vw, 19px);
+  line-height: 1.25;
+}
+
+.credit-overlay small {
+  font: 700 11px var(--mono);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #c3cddd;
+}
+
+@media (hover: hover) {
+  .credit-photo-link:hover .credit-overlay,
+  .credit-photo-link:focus-visible .credit-overlay {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .credit-overlay { transition: none; }
+}
+
+/* touch screens have no hover: show a LinkedIn bar along the bottom of the photo instead */
+@media (hover: none) {
+  .credit-overlay {
+    display: none;
+  }
+
+  .credit-badge {
+    top: auto;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: auto;
+    height: 40px;
+    grid-auto-flow: column;
+    justify-content: center;
+    gap: 8px;
+    border-top: 2px solid var(--gold);
+  }
+
+  .credit-badge::after {
+    content: "LinkedIn";
+    font: 800 12px var(--mono);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #fff;
+  }
 }
 
 .credit-photo {
@@ -980,8 +1093,6 @@ section[id] {
   aspect-ratio: 1 / 1;
   object-fit: cover;
   background-color: var(--paper-2);
-  border: 2px solid var(--ink);
-  box-shadow: 6px 6px 0 var(--gold);
 }
 
 /* ===== FOOTER ===== */
