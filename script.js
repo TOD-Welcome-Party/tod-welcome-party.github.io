@@ -1,6 +1,6 @@
 // ===== EVENT TIMES (Cairo, UTC+3) =====
-const EVENT_START = new Date("2026-10-12T09:00:00+03:00");
-const EVENT_DAY_START = new Date("2026-10-12T00:00:00+03:00");
+const EVENT_START = new Date("2026-10-20T09:00:00+03:00");
+const EVENT_DAY_START = new Date("2026-10-20T00:00:00+03:00");
 
 // ===== MOBILE NAV TOGGLE =====
 const navToggle = document.getElementById("navToggle");
@@ -116,7 +116,6 @@ function renderAgenda(items, currentItemId) {
       frag.appendChild(timeline);
       lastStage = stage;
     }
-
     const row = el("div", "timeline-item");
     row.setAttribute("data-item-id", item.id);
     if (index === currentIndex) row.classList.add("is-live");
@@ -230,7 +229,6 @@ if (registerForm) {
   const formStatus = document.getElementById("formStatus");
   const inviteAlt = document.getElementById("inviteAlt");
   const submitButton = registerForm.querySelector("button[type='submit']");
-
   function setStatus(message, isError) {
     formStatus.textContent = message;
     formStatus.classList.toggle("error", Boolean(isError));
@@ -282,7 +280,7 @@ if (registerForm) {
         document.getElementById("successText").textContent =
           Date.now() >= EVENT_DAY_START
             ? "Welcome! You're checked in."
-            : "You're registered. See you on Monday, October 12.";
+            : "You're registered. See you on Tuesday, October 20.";
         setInviteLink(document.getElementById("inviteLink"));
         successMessage.classList.remove("hidden");
         registerForm.reset();
